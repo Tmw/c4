@@ -1,0 +1,59 @@
+:root {
+    --cell-size: 60px;
+
+    --board-bg-color: #0000ff;
+    --player-yellow-chip-color-100: rgb(255, 255, 0);
+    --player-yellow-chip-color-50: rgba(255, 255, 0.5);
+    --player-red-chip-color-100: rgb(255, 0, 0);
+    --player-red-chip-color-50: rgba(255, 0, 0, 0.5);
+
+    --column-gap: 5px;
+    --column-highlight-color: rgba(255, 255, 255, 0.2);
+}
+
+.board {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    background-color: var(--board-bg-color);
+}
+
+.column {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--column-gap);
+
+    padding-top: calc(var(--cell-size) * 2);
+}
+
+.column:hover {
+    background-color: var(--column-highlight-color);
+}
+
+.column:hover::before {
+    display: block;
+    content: '';
+    width: var(--cell-size);
+    height: var(--cell-size);
+    border-radius: 50%;
+    background-color: var(--player-yellow-chip-color-50);
+    position: absolute;
+
+    transform: translateY(calc(var(--cell-size) * -1 - var(--column-gap)))
+}
+
+.cell {
+    width: var(--cell-size);
+    height: var(--cell-size);
+    border-radius: 50%;
+    background-color: white;
+}
+
+.cell-state-red {
+    background-color: var(--player-red-chip-color-100);
+}
+
+.cell-state-yellow {
+    background-color: var(--player-yellow-chip-color-100);
+}
