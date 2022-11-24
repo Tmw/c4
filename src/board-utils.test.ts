@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { makeBoard, putCell } from "./board-utils";
+import { checkCells, makeBoard, putCell } from "./board-utils";
+import type { State } from "./types";
 
 describe("makeBoard", () => {
   it("created a new board", () => {
@@ -40,5 +41,43 @@ describe("putCell", () => {
 
     board = putCell(board, 2, "yellow");
     expect(board.at(2)).toEqual(["red", "yellow", "red", "yellow"]);
+  });
+});
+
+describe("checkCells", () => {
+  it("detects win for red", () => {
+    const cells: State.Cell[] = [
+      "yellow",
+      "yellow",
+      "red",
+      "red",
+      "red",
+      "red",
+    ];
+    expect(checkCells(cells)).toEqual("red");
+  });
+
+  it("detects win for yellow", () => {
+    const cells: State.Cell[] = [
+      "red",
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow",
+      "red",
+    ];
+    expect(checkCells(cells)).toEqual("yellow");
+  });
+
+  it("detects no winners", () => {
+    const cells: State.Cell[] = [
+      "red",
+      "yellow",
+      "red",
+      "yellow",
+      "yellow",
+      "red",
+    ];
+    expect(checkCells(cells)).toEqual("none");
   });
 });

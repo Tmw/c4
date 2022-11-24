@@ -93,7 +93,7 @@ export const getDiagonalsBottomToTop = (board: State.Board): State.Cell[][] => {
   return out;
 };
 
-const checkCells = (cells: State.Cell[]): State.Player | "none" => {
+export const checkCells = (cells: State.Cell[]): State.Player | "none" => {
   let dupCount = 0;
 
   for (let i = 1; i < cells.length; i++) {
