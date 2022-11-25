@@ -1,8 +1,8 @@
-import React, { useState, useCallback } from "react";
-import type { State } from "./types";
-import { makeBoard, checkBoardState, putCell } from "./board-utils";
+import React, { useCallback } from "react";
+import type { State } from "@/types";
+import { useGameState } from "@/hooks/useGameState";
 
-import "./app.css";
+import "@/assets/css/app.css";
 
 interface CellProps {
   cell: State.Cell;
@@ -27,36 +27,6 @@ const Column: React.FC<ColumnProps> = (props: ColumnProps) => {
     </div>
   );
 };
-
-const initialState = (): State.GameState => {
-  return {
-    status: "playing",
-    currentPlayer: "yellow",
-    board: makeBoard(),
-  };
-};
-
-const oppositePlayer = (player: State.Player): State.Player =>
-  player === "red" ? "yellow" : "red";
-
-// Note: Might want to switch to UseReducer instead
-// TODO: unit tests (prolly easier with use reducer)
-function useGameState() {
-  const [state, setGameState] = useState(initialState());
-
-  const playColumn = (columnId: number) => {
-    const newBoard = putCell(state.board, columnId, state.currentPlayer);
-
-    setGameState({
-      ...state,
-      currentPlayer: oppositePlayer(state.currentPlayer),
-      board: newBoard,
-      status: checkBoardState(newBoard),
-    });
-  };
-
-  return { ...state, playColumn } as const;
-}
 
 export default function App() {
   const { currentPlayer, board, status, playColumn } = useGameState();

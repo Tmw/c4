@@ -1,5 +1,5 @@
-import type { State } from "./types";
-import { BOARD_HEIGHT, BOARD_WIDTH } from "./constants";
+import type { State } from "@/types/index";
+import { BOARD_HEIGHT, BOARD_WIDTH } from "@/config/constants";
 
 const getVerticals = (board: State.Board): State.Cell[][] => board;
 const getHorizontals = (board: State.Board): State.Cell[][] => {

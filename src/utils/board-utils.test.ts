@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { checkBoardState, makeBoard, putCell } from "./board-utils";
-import type { State } from "./types";
+import type { State } from "@/types/index";
 
 describe("makeBoard", () => {
   it("created a new board", () => {
