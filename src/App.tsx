@@ -39,10 +39,6 @@ const initialState = (): State.GameState => {
 const oppositePlayer = (player: State.Player): State.Player =>
   player === "red" ? "yellow" : "red";
 
-const replace = <T,>(list: T[], idx: number, newVal: T): T[] => {
-  return [...list.slice(0, idx), newVal, ...list.slice(idx + 1)];
-};
-
 // Note: Might want to switch to UseReducer instead
 // TODO: unit tests (prolly easier with use reducer)
 function useGameState() {

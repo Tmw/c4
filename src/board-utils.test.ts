@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { checkCells, makeBoard, putCell } from "./board-utils";
+import { checkBoardState, makeBoard, putCell } from "./board-utils";
 import type { State } from "./types";
 
 describe("makeBoard", () => {
@@ -44,40 +44,48 @@ describe("putCell", () => {
   });
 });
 
-describe("checkCells", () => {
-  it("detects win for red", () => {
-    const cells: State.Cell[] = [
-      "yellow",
-      "yellow",
-      "red",
-      "red",
-      "red",
-      "red",
+describe("checkBoardState", () => {
+  it("should flag winner horizontally", () => {
+    const board: State.Cell[][] = [
+      ["open", "open", "yellow", "red"],
+      ["open", "open", "yellow", "yellow"],
+      ["open", "open", "yellow", "red"],
+      ["open", "open", "yellow", "yellow"],
     ];
-    expect(checkCells(cells)).toEqual("red");
+
+    expect(checkBoardState(board)).toEqual("winner-yellow");
   });
 
-  it("detects win for yellow", () => {
-    const cells: State.Cell[] = [
-      "red",
-      "yellow",
-      "yellow",
-      "yellow",
-      "yellow",
-      "red",
+  it("should flag winner horizontally", () => {
+    const board: State.Cell[][] = [
+      ["yellow", "yellow", "yellow", "yellow"],
+      ["open", "open", "red", "yellow"],
+      ["open", "open", "yellow", "red"],
+      ["open", "open", "yellow", "yellow"],
     ];
-    expect(checkCells(cells)).toEqual("yellow");
+
+    expect(checkBoardState(board)).toEqual("winner-yellow");
   });
 
-  it("detects no winners", () => {
-    const cells: State.Cell[] = [
-      "red",
-      "yellow",
-      "red",
-      "yellow",
-      "yellow",
-      "red",
+  it("should flag winner diagonal (top-to-bottom)", () => {
+    const board: State.Cell[][] = [
+      ["yellow", "yellow", "red", "yellow"],
+      ["open", "yellow", "red", "yellow"],
+      ["open", "open", "yellow", "red"],
+      ["open", "open", "yellow", "yellow"],
     ];
-    expect(checkCells(cells)).toEqual("none");
+
+    expect(checkBoardState(board)).toEqual("winner-yellow");
+  });
+
+  it("should flag winner diagonal (bottom-to-top)", () => {
+    const board: State.Cell[][] = [
+      ["open", "open", "yellow", "yellow"],
+      ["open", "open", "yellow", "yellow"],
+      ["open", "yellow", "red", "red"],
+      ["yellow", "open", "yellow", "yellow"],
+    ];
+
+    expect(checkBoardState(board)).toEqual("winner-yellow");
   });
 });

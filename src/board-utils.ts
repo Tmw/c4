@@ -1,9 +1,8 @@
 import type { State } from "./types";
 import { BOARD_HEIGHT, BOARD_WIDTH } from "./constants";
 
-export const getVerticals = (board: State.Board): State.Cell[][] => board;
-
-export const getHorizontals = (board: State.Board): State.Cell[][] => {
+const getVerticals = (board: State.Board): State.Cell[][] => board;
+const getHorizontals = (board: State.Board): State.Cell[][] => {
   const columnLength = board[0].length;
   const out: Array<State.Cell[]> = [];
 
@@ -19,7 +18,7 @@ export const getHorizontals = (board: State.Board): State.Cell[][] => {
   return out;
 };
 
-export const getDiagonalsTopToBottom = (board: State.Board): State.Cell[][] => {
+const getDiagonalsTopToBottom = (board: State.Board): State.Cell[][] => {
   const columnLength = board[0].length;
   const rowLength = board.length;
   const out: Array<Array<State.Cell>> = [];
@@ -30,16 +29,15 @@ export const getDiagonalsTopToBottom = (board: State.Board): State.Cell[][] => {
   while (startCol < rowLength || startRow > 0) {
     const diagonal: Array<State.Cell> = [];
 
-    // NOTE: Pretty sure this can just be a for-loop tho
-    let col = startCol;
-    let row = startRow;
-
-    while (col <= rowLength && row <= columnLength) {
+    for (
+      let col = startCol, row = startRow;
+      col <= rowLength && row <= columnLength;
+      col++, row++
+    ) {
       const cell = board.at(col)?.at(row);
-      if (cell) diagonal.push(cell);
-
-      col++;
-      row++;
+      if (cell) {
+        diagonal.push(cell);
+      }
     }
 
     if (diagonal.length >= 4) {
@@ -56,7 +54,7 @@ export const getDiagonalsTopToBottom = (board: State.Board): State.Cell[][] => {
   return out;
 };
 
-export const getDiagonalsBottomToTop = (board: State.Board): State.Cell[][] => {
+const getDiagonalsBottomToTop = (board: State.Board): State.Cell[][] => {
   const columnLength = board[0].length;
   const rowLength = board.length;
   const out: Array<Array<State.Cell>> = [];
@@ -67,19 +65,16 @@ export const getDiagonalsBottomToTop = (board: State.Board): State.Cell[][] => {
   while (startCol > 0 || startRow > 0) {
     const diagonal: Array<State.Cell> = [];
 
-    // NOTE: Pretty sure this can just be a for-loop tho
-    let col = startCol;
-    let row = startRow;
-
-    while (col >= 0 && row <= rowLength) {
+    for (
+      let col = startCol, row = startRow;
+      col >= 0 && row <= rowLength;
+      col--, row++
+    ) {
       const cell = board.at(col)?.at(row);
       if (cell) diagonal.push(cell);
-
-      col--;
-      row++;
     }
 
-    if (diagonal.length) {
+    if (diagonal.length >= 4) {
       out.push(diagonal);
     }
 
@@ -93,7 +88,7 @@ export const getDiagonalsBottomToTop = (board: State.Board): State.Cell[][] => {
   return out;
 };
 
-export const checkCells = (cells: State.Cell[]): State.Player | "none" => {
+const checkCells = (cells: State.Cell[]): State.Player | "none" => {
   let dupCount = 0;
 
   for (let i = 1; i < cells.length; i++) {
