@@ -1,4 +1,3 @@
-import React from "react";
 import { State } from "@/types";
 import { Cell } from "@/components";
 
@@ -8,7 +7,7 @@ interface ColumnProps {
   onClick: (idx: number) => void;
 }
 
-export const Column: React.FC<ColumnProps> = (props: ColumnProps) => {
+export function Column(props: ColumnProps) {
   return (
     <div className="column" onClick={() => props.onClick(props.columnId)}>
       {props.column.map((cell: State.Cell, idx: number) => (
@@ -16,4 +15,4 @@ export const Column: React.FC<ColumnProps> = (props: ColumnProps) => {
       ))}
     </div>
   );
-};
+}
