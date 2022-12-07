@@ -5,7 +5,7 @@ import { makeBoard, checkBoardState, putCell } from "@/utils/board-utils";
 
 const initialState = (): State.GameState => {
   return {
-    status: "playing",
+    status: { status: "playing" },
     currentPlayer: "yellow",
     board: makeBoard(),
   };

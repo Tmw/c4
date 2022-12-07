@@ -3,8 +3,13 @@ export namespace State {
   export type Cell = "open" | Player;
   export type Column = Cell[];
   export type Board = Column[];
+
+  export type GameStatus =
+    | { status: "playing" | "draw" }
+    | { status: "winner"; player: Player };
+
   export type GameState = {
-    status: "playing" | "draw" | "winner-red" | "winner-yellow";
+    status: GameStatus;
     board: Board;
     currentPlayer: Player;
   };

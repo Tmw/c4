@@ -5,6 +5,17 @@ import { Column } from "@/components";
 
 import "@/assets/css/app.css";
 
+const renderGameStatus = (state: State.GameStatus): string => {
+  switch (state.status) {
+    case "draw":
+    case "playing":
+      return state.status;
+
+    case "winner":
+      return `player ${state.player} won!`;
+  }
+};
+
 export default function App() {
   const { currentPlayer, board, status, playColumn } = useGameState();
 
@@ -18,7 +29,7 @@ export default function App() {
   return (
     <div className="App">
       <p>
-        current player: {currentPlayer} | game state: {status}
+        current player: {currentPlayer} | game state: {renderGameStatus(status)}
       </p>
       <div className={`board current-player-${currentPlayer}`}>
         {board.map((column: State.Column, idx: number) => (

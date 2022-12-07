@@ -53,7 +53,10 @@ describe("checkBoardState", () => {
       ["open", "open", "yellow", "yellow"],
     ];
 
-    expect(checkBoardState(board)).toEqual("winner-yellow");
+    expect(checkBoardState(board)).toEqual({
+      status: "winner",
+      player: "yellow",
+    });
   });
 
   it("should flag winner horizontally", () => {
@@ -64,7 +67,10 @@ describe("checkBoardState", () => {
       ["open", "open", "yellow", "yellow"],
     ];
 
-    expect(checkBoardState(board)).toEqual("winner-yellow");
+    expect(checkBoardState(board)).toEqual({
+      status: "winner",
+      player: "yellow",
+    });
   });
 
   it("should flag winner diagonal (top-to-bottom)", () => {
@@ -75,7 +81,10 @@ describe("checkBoardState", () => {
       ["open", "open", "yellow", "yellow"],
     ];
 
-    expect(checkBoardState(board)).toEqual("winner-yellow");
+    expect(checkBoardState(board)).toEqual({
+      status: "winner",
+      player: "yellow",
+    });
   });
 
   it("should flag winner diagonal (bottom-to-top)", () => {
@@ -86,6 +95,9 @@ describe("checkBoardState", () => {
       ["yellow", "open", "yellow", "yellow"],
     ];
 
-    expect(checkBoardState(board)).toEqual("winner-yellow");
+    expect(checkBoardState(board)).toEqual({
+      status: "winner",
+      player: "yellow",
+    });
   });
 });

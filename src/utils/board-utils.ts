@@ -123,11 +123,11 @@ export const checkBoardState = (
   for (let cells of sequelsToCheck) {
     const result = checkCells(cells);
     if (result !== "none") {
-      return `winner-${result}`;
+      return { status: "winner", player: result };
     }
   }
 
-  return "playing";
+  return { status: "playing" };
 };
 
 export const putCell = (
