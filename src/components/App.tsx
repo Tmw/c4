@@ -1,5 +1,3 @@
-import React from "react";
-import type { State } from "@/types";
 import { useGameState } from "@/hooks/useGameState";
 import { Board, GameOver } from "@/components";
 

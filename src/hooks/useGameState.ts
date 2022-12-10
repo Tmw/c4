@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import type { State } from "@/types";
 import { makeBoard, checkBoardState, putCell } from "@/utils/board-utils";
 
