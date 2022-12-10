@@ -28,5 +28,7 @@ export function useGameState() {
     });
   };
 
-  return { ...state, playColumn } as const;
+  const restartGame = () => setGameState(initialState());
+
+  return { ...state, playColumn, restartGame } as const;
 }
