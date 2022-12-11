@@ -95,12 +95,12 @@ const checkCells = (cells: State.Cell[]): State.Player | "none" => {
     // if cell is not open and new cell is equal to previous cell we increase the dupCounter.
     // only if we have seen 3 or more duplicates (meaning four or more of the same cells)
     // we assume a winner.
-    if (cells[i] !== "open" && cells[i] === cells[i - 1]) {
+    const cell = cells.at(i);
+    if (cell !== "open" && cell === cells[i - 1]) {
       dupCount++;
 
       if (dupCount >= 3) {
-        // Note: Perhaps Satisfies would be helpful here?
-        return cells[i] as State.Player;
+        return cell;
       }
 
       continue;
