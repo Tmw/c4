@@ -5,5 +5,5 @@ interface CellProps {
 }
 
 export function Cell(props: CellProps) {
-  return <div className={`cell cell-state-${props.cell}`}></div>;
+  return <div className={`cell cell-state-${props.cell.status}`}></div>;
 }

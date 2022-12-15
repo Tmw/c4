@@ -1,6 +1,10 @@
 export namespace State {
   export type Player = "red" | "yellow";
-  export type Cell = "open" | Player;
+  export type CellState = "open" | Player;
+  export type Cell = {
+    identifier: string;
+    status: CellState;
+  };
   export type Column = Cell[];
   export type Board = Column[];
 

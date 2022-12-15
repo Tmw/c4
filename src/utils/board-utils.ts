@@ -96,11 +96,11 @@ const checkCells = (cells: State.Cell[]): State.Player | "none" => {
     // only if we have seen 3 or more duplicates (meaning four or more of the same cells)
     // we assume a winner.
     const cell = cells.at(i);
-    if (cell !== "open" && cell === cells[i - 1]) {
+    if (cell?.status !== "open" && cell?.status === cells[i - 1].status) {
       dupCount++;
 
       if (dupCount >= 3) {
-        return cell;
+        return cell.status;
       }
 
       continue;
@@ -142,12 +142,17 @@ export const putCell = (
   }
 
   // find open spot in column
-  const openIndex = column.findLastIndex((cell: State.Cell) => cell === "open");
+  const openIndex = column.findLastIndex(
+    ({ status }: State.Cell) => status === "open"
+  );
   if (openIndex < 0) {
     return board;
   }
 
-  const newColumn = replace(column, openIndex, player);
+  const newColumn = replace(column, openIndex, {
+    ...column[openIndex],
+    status: player,
+  });
   return replace(board, columnIndex, newColumn);
 };
 
@@ -155,10 +160,14 @@ const replace = <T>(list: T[], idx: number, newVal: T): T[] => {
   return [...list.slice(0, idx), newVal, ...list.slice(idx + 1)];
 };
 
-const makeColumn = (length: number): State.Column =>
-  Array.from({ length }, (_v, _k) => "open");
+const makeColumn = (colIdx: number, length: number): State.Column =>
+  Array.from({ length }, (_v, cellIdentifier) => ({
+    identifier: `${cellIdentifier}x${colIdx}`,
+    status: "open",
+  }));
 
 export const makeBoard = (
   width: number = BOARD_WIDTH,
   height: number = BOARD_HEIGHT
-): State.Board => Array.from({ length: width }, (_v, _k) => makeColumn(height));
+): State.Board =>
+  Array.from({ length: width }, (_v, idx) => makeColumn(idx, height));
