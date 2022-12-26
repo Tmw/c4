@@ -4,10 +4,10 @@ import { BOARD_HEIGHT, BOARD_WIDTH } from "@/config/constants";
 const getVerticals = (board: State.Board): State.Cell[][] => board;
 const getHorizontals = (board: State.Board): State.Cell[][] => {
   const columnLength = board[0].length;
-  const out: Array<State.Cell[]> = [];
+  const out = [];
 
   for (let row = 0; row < columnLength; row++) {
-    const sequence: Array<State.Cell> = [];
+    const sequence = [];
     for (let col = 0; col < board.length; col++) {
       sequence.push(board[col][row]);
     }
@@ -88,31 +88,39 @@ const getDiagonalsBottomToTop = (board: State.Board): State.Cell[][] => {
   return out;
 };
 
-const checkCells = (cells: State.Cell[]): State.Player | "none" => {
-  let dupCount = 0;
+const checkCells = (cells: State.Cell[]): State.GameStatusWinner | "none" => {
+  let winningCells = [];
 
   for (let i = 1; i < cells.length; i++) {
-    // if cell is not open and new cell is equal to previous cell we increase the dupCounter.
-    // only if we have seen 3 or more duplicates (meaning four or more of the same cells)
+    // if cell is not open and new cell is equal to previous cell store the cell in winningCells.
+    // only if we have stored 4 or more duplicates (meaning four or more of the same cells)
     // we assume a winner.
     const cell = cells.at(i);
     if (cell?.status !== "open" && cell?.status === cells[i - 1].status) {
-      dupCount++;
-
-      if (dupCount >= 3) {
-        return cell.status;
+      // for first match also store previous cell
+      if (winningCells.length === 0) {
+        winningCells.push(cells[i - 1]);
       }
 
-      continue;
+      // store current cell
+      winningCells.push(cell);
+
+      if (winningCells.length >= 4) {
+        return {
+          status: "winner",
+          player: cell.status,
+          winningCells,
+        };
+      }
+    } else {
+      winningCells = [];
     }
   }
 
   return "none";
 };
 
-export const checkBoardState = (
-  board: State.Board
-): State.GameState["status"] => {
+export const checkBoardState = (board: State.Board): State.GameStatus => {
   const sequelsToCheck = [
     ...getVerticals(board),
     ...getHorizontals(board),
@@ -123,7 +131,7 @@ export const checkBoardState = (
   for (let cells of sequelsToCheck) {
     const result = checkCells(cells);
     if (result !== "none") {
-      return { status: "winner", player: result };
+      return result;
     }
   }
 

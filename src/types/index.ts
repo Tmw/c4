@@ -8,9 +8,18 @@ export namespace State {
   export type Column = Cell[];
   export type Board = Column[];
 
+  export type GameStatusPlaying = { status: "playing" };
+  export type GameStatusDraw = { status: "playing" };
+  export type GameStatusWinner = {
+    status: "winner";
+    player: Player;
+    winningCells: Cell[];
+  };
+
   export type GameStatus =
-    | { status: "playing" | "draw" }
-    | { status: "winner"; player: Player };
+    | GameStatusPlaying
+    | GameStatusDraw
+    | GameStatusWinner;
 
   export type GameState = {
     status: GameStatus;

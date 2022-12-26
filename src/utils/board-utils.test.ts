@@ -55,6 +55,12 @@ describe("checkBoardState", () => {
     expect(checkBoardState(board)).toEqual({
       status: "winner",
       player: "yellow",
+      winningCells: [
+        { identifier: "2x0", status: "yellow" },
+        { identifier: "2x1", status: "yellow" },
+        { identifier: "2x2", status: "yellow" },
+        { identifier: "2x3", status: "yellow" },
+      ],
     });
   });
 
@@ -69,6 +75,12 @@ describe("checkBoardState", () => {
     expect(checkBoardState(board)).toEqual({
       status: "winner",
       player: "yellow",
+      winningCells: [
+        { identifier: "0x0", status: "yellow" },
+        { identifier: "1x0", status: "yellow" },
+        { identifier: "2x0", status: "yellow" },
+        { identifier: "3x0", status: "yellow" },
+      ],
     });
   });
 
@@ -83,6 +95,12 @@ describe("checkBoardState", () => {
     expect(checkBoardState(board)).toEqual({
       status: "winner",
       player: "yellow",
+      winningCells: [
+        { identifier: "0x0", status: "yellow" },
+        { identifier: "1x1", status: "yellow" },
+        { identifier: "2x2", status: "yellow" },
+        { identifier: "3x3", status: "yellow" },
+      ],
     });
   });
 
@@ -97,6 +115,27 @@ describe("checkBoardState", () => {
     expect(checkBoardState(board)).toEqual({
       status: "winner",
       player: "yellow",
+      winningCells: [
+        { identifier: "0x3", status: "yellow" },
+        { identifier: "1x2", status: "yellow" },
+        { identifier: "2x1", status: "yellow" },
+        { identifier: "3x0", status: "yellow" },
+      ],
+    });
+  });
+
+  it("should not flag winner if not four consecutive", () => {
+    const board: State.Board = inflateBoard([
+      ["open", "open", "open", "open", "open", "open"],
+      ["open", "open", "open", "open", "open", "open"],
+      ["open", "open", "open", "open", "open", "open"],
+      ["open", "open", "open", "open", "open", "open"],
+      ["open", "open", "open", "open", "open", "open"],
+      ["yellow", "yellow", "open", "yellow", "yellow", "yellow"],
+    ]);
+
+    expect(checkBoardState(board)).toEqual({
+      status: "playing",
     });
   });
 });
