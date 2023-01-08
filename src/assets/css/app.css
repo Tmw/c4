@@ -94,10 +94,22 @@ body {
   background-color: white;
 }
 
+.cell-highlighted {
+  box-sizing: border-box;
+  border: 5px solid var(--won-highlight);
+  animation: fade-in-out-in 1.5s infinite;
+}
+
 .cell-state-red {
   background-color: var(--player-red-chip-color-100);
 }
 
 .cell-state-yellow {
   background-color: var(--player-yellow-chip-color-100);
+}
+
+@keyframes fade-in-out-in {
+  0%   { opacity:1; }
+  50%  { opacity:0.5; }
+  100% { opacity:1; }
 }

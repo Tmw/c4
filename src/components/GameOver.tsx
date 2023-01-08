@@ -16,6 +16,7 @@ export function GameOver({
     switch (status.status) {
       case "draw":
         return "Draw!";
+
       case "winner":
         return `${capitalize(status.player)} won!`;
 

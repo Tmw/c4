@@ -9,7 +9,7 @@ export namespace State {
   export type Board = Column[];
 
   export type GameStatusPlaying = { status: "playing" };
-  export type GameStatusDraw = { status: "playing" };
+  export type GameStatusDraw = { status: "draw" };
   export type GameStatusWinner = {
     status: "winner";
     player: Player;

@@ -170,7 +170,7 @@ const replace = <T>(list: T[], idx: number, newVal: T): T[] => {
 
 const makeColumn = (colIdx: number, length: number): State.Column =>
   Array.from({ length }, (_v, cellIdentifier) => ({
-    identifier: `${cellIdentifier}x${colIdx}`,
+    identifier: `${colIdx}x${cellIdentifier}`,
     status: "open",
   }));
 

@@ -1,6 +1,5 @@
 import { useGameState } from "@/hooks/useGameState";
 import { Board, GameOver } from "@/components";
-
 import "@/assets/css/app.css";
 
 export default function App() {
@@ -16,6 +15,7 @@ export default function App() {
       <Board
         currentPlayer={currentPlayer}
         board={board}
+        status={status}
         onColumnClicked={(idx: number) => playColumn(idx)}
         isDisabled={status.status !== "playing"}
       />
