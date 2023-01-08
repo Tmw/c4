@@ -1,11 +1,11 @@
 :root {
   --cell-size: 60px;
 
-  --board-bg-color: #0000ff;
-  --player-yellow-chip-color-100: rgb(255, 255, 0);
-  --player-yellow-chip-color-50: rgba(255, 255, 0.5);
-  --player-red-chip-color-100: rgb(255, 0, 0);
-  --player-red-chip-color-50: rgba(255, 0, 0, 0.5);
+  --board-bg-color: #34568b;
+  --player-yellow-chip-color-100: rgb(239, 192, 80);
+  --player-yellow-chip-color-50: rgba(239, 192, 80, 0.5);
+  --player-red-chip-color-100: rgb(255, 111, 97);
+  --player-red-chip-color-50: rgba(255, 111, 97, 0.5);
 
   --column-gap: 5px;
   --column-highlight-color: rgba(255, 255, 255, 0.2);
