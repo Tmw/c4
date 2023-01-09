@@ -10,5 +10,8 @@ npm install
 npm run dev
 ```
 
+## Demo
+See it in action [here](https://tmw.github.io/c4/)
+
 ## License
 [MIT](./LICENSE)
