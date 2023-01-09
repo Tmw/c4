@@ -8,7 +8,6 @@
   --player-red-chip-color-50: rgba(255, 111, 97, 0.5);
 
   --column-gap: 5px;
-  --column-highlight-color: rgba(255, 255, 255, 0.2);
 }
 
 html,
@@ -19,20 +18,33 @@ body {
   width: 100%;
   background-color: var(--board-bg-color);
 
+}
+
+#root {
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+  width: 100%;
+
   display: flex;
   justify-content: center;
 }
 
 .app {
   margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .game-over {
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  background-color: rgba(255, 255, 255, 0.3);
-  border-radius: 12px;
+  --height: 200px;
 
-  padding: 12px;
+  box-sizing:border-box;
+  height: var(--height);
+  margin-top: calc(var(--height) * -1);
+  text-align: center;
 }
 
 .game-over button {
@@ -60,12 +72,6 @@ body {
   display: flex;
   flex-direction: column;
   gap: var(--column-gap);
-
-  padding-top: calc(var(--cell-size) * 2);
-}
-
-.board.enabled .column:hover {
-  background-color: var(--column-highlight-color);
 }
 
 .board.enabled .column:hover::before {
